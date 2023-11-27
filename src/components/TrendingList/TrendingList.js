@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Item, List, Title, TrendingContainer } from './TrendingList.styled';
 
 export default function TrendingList({ movies }) {
@@ -7,7 +8,7 @@ export default function TrendingList({ movies }) {
       <List>
         {movies.map(movie => (
           <Item key={movie.id}>
-            <a href={`/${movie.id}`}>{movie.title}</a>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
           </Item>
         ))}
       </List>

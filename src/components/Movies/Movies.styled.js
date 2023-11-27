@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const SearchBar = styled.div`
   top: 0;
@@ -49,5 +50,14 @@ export const SearchInput = styled.input`
   padding-right: ${p => p.theme.spacing(1)};
   &::placeholder {
     font-size: 18px;
+  }
+`;
+
+export const StyledLink = styled(NavLink)`
+  font-size: 24px;
+  padding-left: ${p => p.theme.spacing(3)};
+  &:hover {
+    font-size: 28px;
+    color: ${p => p.theme.colors.green};
   }
 `;

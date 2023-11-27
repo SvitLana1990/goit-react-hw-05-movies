@@ -10,30 +10,30 @@ export const apiFetchTrendingMovies = async () => {
   return response;
 };
 
-export const apiSearchMovies = async ({ value }) => {
+export const apiSearchMovies = async value => {
   const response = await axios.get(
     `search/movie?query=${value}&include_adult=false&language=en-US&page=1&api_key=${API_KEY}`
   );
-  return response;
+  return response.data.results;
 };
 
 export const apiMovieDetails = async ({ id }) => {
   const response = await axios.get(
-    `movie/${id}?language=en-US&api_key=${API_KEY}`
+    `movie/${id}?language=en-US&append_to_response=videos,images,credits&api_key=${API_KEY}`
   );
-  return response;
+  return response.data;
 };
 
-export const apiCredits = async ({ id }) => {
+export const apiCast = async ({ id }) => {
   const response = await axios.get(
-    `movie/${id}/credits?language=en-US&api_key=${API_KEY}`
+    `movie/${id}/credits?language=en-US&append_to_response=videos,images,credits&api_key=${API_KEY}`
   );
-  return response;
+  return response.data.cast;
 };
 
 export const apiReviews = async ({ id }) => {
   const response = await axios.get(
-    `movie/${id}/reviews?language=en-US&page=1&api_key=${API_KEY}`
+    `movie/${id}/reviews?language=en-US&append_to_response=videos,images,credits&api_key=${API_KEY}`
   );
-  return response;
+  return response.data.credits;
 };

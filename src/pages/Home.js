@@ -35,7 +35,7 @@ export default function HomePage() {
   }, []);
   return (
     <div>
-      {isError && <div>Unable to fetch images. Please try again.</div>}
+      {isError && <div>Unable to fetch movies. Please try again.</div>}
       {movies.length > 0 && <TrendingList movies={movies} />}
       {isLoading && <MovieLoader />}
     </div>

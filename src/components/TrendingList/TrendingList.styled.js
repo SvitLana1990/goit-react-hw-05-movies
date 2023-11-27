@@ -22,4 +22,7 @@ export const Item = styled.li`
   font-size: 20px;
   font-style: italic;
   text-decoration: underline;
+  &:hover {
+    color: ${p => p.theme.colors.green};
+  }
 `;
