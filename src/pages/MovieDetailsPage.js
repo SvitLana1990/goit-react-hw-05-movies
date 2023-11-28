@@ -1,20 +1,19 @@
-// MovieDetailsPage.js
 import { toast } from 'react-hot-toast';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { apiMovieDetails } from 'api';
 import { useEffect, useState, useRef } from 'react';
-import { useLocation, useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { MovieLoader } from 'components/Loader/Loader';
 import MovieDetails from 'components/MovieDetails/MovieDetails';
 import { StyledNavBack } from 'components/MovieDetails/MovieDetails.styled';
 
 export default function MovieDetailsPage() {
-  const location = useLocation();
-  const backLinkRef = useRef(location);
   const { movieId } = useParams();
   const [details, setDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     async function getMovie() {
@@ -57,10 +56,10 @@ export default function MovieDetailsPage() {
     <div>
       {isLoading && <MovieLoader />}
       {isError && <div>Error fetching movie details</div>}
-      <StyledNavBack to={backLinkRef.current.state ?? '/'}>
+      <StyledNavBack to={backLinkRef.current}>
         <b>
           <IoMdArrowRoundBack size={20} />
-          Back to Home
+          Go back
         </b>
       </StyledNavBack>
       {details && <MovieDetails data={details} />}

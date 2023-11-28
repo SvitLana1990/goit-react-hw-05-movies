@@ -9,6 +9,7 @@ import {
   SearchInput,
   SearchList,
   SearchMovieTitle,
+  MovieContainer,
 } from '../components/Movies/Movies.styled';
 import { apiSearchMovies } from 'api';
 import { MovieLoader } from '../components/Loader/Loader';
@@ -26,10 +27,12 @@ export default function MoviesPage() {
       const results = await apiSearchMovies(value);
       setSearchResults(results);
       setSearchParams({ query: value });
+      setIsError(false);
     } catch (error) {
       setIsError(true);
     } finally {
       setIsLoading(false);
+      setIsError(false);
     }
   };
 
@@ -69,30 +72,17 @@ export default function MoviesPage() {
 
       {isError && <div>Ooops! Error during search</div>}
       {searchResults.length > 0 && (
-        <div>
+        <MovieContainer>
           <SearchList>
             {searchResults.map(movie => (
               <li key={movie.id}>
                 <NavLink to={`/movies/${movie.id}`}>
-                  {movie.poster_path ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                      alt={movie.title}
-                      height="300"
-                    />
-                  ) : (
-                    <img
-                      src="https://placehold.it/300x450?text=Image_not_found"
-                      alt={movie.title || 'Image not found'}
-                      height="300"
-                    />
-                  )}
                   <SearchMovieTitle>{movie.title}</SearchMovieTitle>
                 </NavLink>
               </li>
             ))}
           </SearchList>
-        </div>
+        </MovieContainer>
       )}
     </>
   );
