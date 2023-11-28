@@ -53,11 +53,19 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const StyledLink = styled(NavLink)`
-  font-size: 24px;
-  padding-left: ${p => p.theme.spacing(3)};
+export const SearchList = styled.ul`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: ${p => p.theme.spacing(5)};
+  column-gap: ${p => p.theme.spacing(3)};
+`;
+
+export const SearchMovieTitle = styled.h3`
+  max-width: 300px;
+  overflow-wrap: break-word;
   &:hover {
-    font-size: 28px;
     color: ${p => p.theme.colors.green};
   }
 `;

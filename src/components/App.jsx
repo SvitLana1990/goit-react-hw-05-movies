@@ -1,34 +1,33 @@
-import { GlobalStyle } from 'GlobalStyle';
+import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { lazy, Suspense } from 'react';
+import { GlobalStyle } from 'GlobalStyle';
+import Cast from './Cast/Cast';
+import Reviews from './Reviews/Reviews';
+import SharedLayout from './Layout/Layout.js';
 
-import HomePage from 'pages/Home';
-import MovieDetailsPage from 'pages/MovieDetails';
-import MoviesPage from 'pages/Movies';
-import { Route, Routes } from 'react-router-dom';
-import { Header, List, NavItem, StyledNavLink } from './App.styled';
+const HomePage = lazy(() => import('pages/HomePage'));
+const MoviesPage = lazy(() => import('pages/MoviesPage'));
+const MovieDetailsPage = lazy(() => import('pages/MovieDetailsPage'));
 
 export const App = () => {
   return (
     <div>
-      <Header>
-        <nav>
-          <List>
-            <NavItem>
-              <StyledNavLink to="/">Home</StyledNavLink>
-            </NavItem>
-            <NavItem>
-              <StyledNavLink to="/movies">Movies</StyledNavLink>
-            </NavItem>
-          </List>
-        </nav>
-      </Header>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
-      </Routes>
-      <GlobalStyle />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+            <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
+            <Route path="*" element={<HomePage />} />
+          </Route>
+        </Routes>
+      </Suspense>
       <Toaster />
+      <GlobalStyle />
     </div>
   );
 };

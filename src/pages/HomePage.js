@@ -1,3 +1,4 @@
+// HomePage.jsx
 import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 import { apiFetchTrendingMovies } from 'api';
@@ -33,6 +34,7 @@ export default function HomePage() {
 
     fetchData();
   }, []);
+
   return (
     <div>
       {isError && <div>Unable to fetch movies. Please try again.</div>}

@@ -1,13 +1,14 @@
 import { CgSearchLoading } from 'react-icons/cg';
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 
 import {
   SearchBar,
   SearchForm,
   SearchFormButton,
   SearchInput,
-  StyledLink,
+  SearchList,
+  SearchMovieTitle,
 } from '../components/Movies/Movies.styled';
 import { apiSearchMovies } from 'api';
 import { MovieLoader } from '../components/Loader/Loader';
@@ -71,15 +72,28 @@ export default function MoviesPage() {
       {isError && <div>Ooops! Error during search</div>}
       {searchResults.length > 0 && (
         <div>
-          <ul>
+          <SearchList>
             {searchResults.map(movie => (
               <li key={movie.id}>
-                <StyledLink to={`/movies/${movie.id}`}>
-                  {movie.title}
-                </StyledLink>
+                <NavLink to={`/movies/${movie.id}`}>
+                  {movie.poster_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                      alt={movie.title}
+                      height="300"
+                    />
+                  ) : (
+                    <img
+                      src="https://placehold.it/300x450?text=Image_not_found"
+                      alt={movie.title || 'Image not found'}
+                      height="300"
+                    />
+                  )}
+                  <SearchMovieTitle>{movie.title}</SearchMovieTitle>
+                </NavLink>
               </li>
             ))}
-          </ul>
+          </SearchList>
         </div>
       )}
     </>

@@ -19,21 +19,21 @@ export const apiSearchMovies = async value => {
 
 export const apiMovieDetails = async ({ id }) => {
   const response = await axios.get(
-    `movie/${id}?language=en-US&append_to_response=videos,images,credits&api_key=${API_KEY}`
+    `movie/${id}?language=en-US&append_to_response=images,credits&api_key=${API_KEY}`
   );
   return response.data;
 };
 
 export const apiCast = async ({ id }) => {
   const response = await axios.get(
-    `movie/${id}/credits?language=en-US&append_to_response=videos,images,credits&api_key=${API_KEY}`
+    `movie/${id}/credits?language=en-US&append_to_response=images,credits&api_key=${API_KEY}`
   );
-  return response.data.cast;
+  return response.data;
 };
 
 export const apiReviews = async ({ id }) => {
   const response = await axios.get(
-    `movie/${id}/reviews?language=en-US&append_to_response=videos,images,credits&api_key=${API_KEY}`
+    `movie/${id}/reviews?language=en-US&append_to_response=images,credits&api_key=${API_KEY}`
   );
-  return response.data.credits;
+  return response.data;
 };
