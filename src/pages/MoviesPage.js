@@ -18,12 +18,11 @@ export default function MoviesPage() {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   const handleSearch = async value => {
     try {
       setIsLoading(true);
-      setIsError(false);
       const results = await apiSearchMovies(value);
       setSearchResults(results);
       setSearchParams({ query: value });
@@ -31,7 +30,6 @@ export default function MoviesPage() {
       setIsError(true);
     } finally {
       setIsLoading(false);
-      setIsError(false);
     }
   };
 
