@@ -51,19 +51,3 @@ export const SearchInput = styled.input`
     font-size: 18px;
   }
 `;
-
-export const MovieContainer = styled.div`
-  padding: ${p => p.theme.spacing(3)};
-`;
-
-export const SearchList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: ${p => p.theme.spacing(3)};
-`;
-
-export const SearchMovieTitle = styled.h3`
-  &:hover {
-    color: ${p => p.theme.colors.green};
-  }
-`;

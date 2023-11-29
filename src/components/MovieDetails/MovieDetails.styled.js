@@ -34,6 +34,10 @@ export const StyledNavLink = styled(NavLink)`
   color: ${p => p.theme.colors.green};
   font-size: 26px;
   text-decoration: underline;
+  &:hover {
+    color: ${p => p.theme.colors.black};
+    font-weight: 600;
+  }
 `;
 
 export const StyledNavBack = styled(NavLink)`

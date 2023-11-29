@@ -3,7 +3,8 @@ import { toast } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 import { apiFetchTrendingMovies } from 'api';
 import { MovieLoader } from 'components/Loader/Loader';
-import TrendingList from 'components/TrendingList/TrendingList';
+import MoviesList from 'components/MoviesList/MoviesList';
+import { Title } from '../components/MoviesList/MoviesList.styled';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -38,7 +39,9 @@ export default function HomePage() {
   return (
     <div>
       {isError && <div>Unable to fetch movies. Please try again.</div>}
-      {movies.length > 0 && <TrendingList movies={movies} />}
+
+      {movies.length > 0 && <Title>Trending today</Title>}
+      {movies.length > 0 && <MoviesList movies={movies} />}
       {isLoading && <MovieLoader />}
     </div>
   );
